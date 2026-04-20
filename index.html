@@ -11,6 +11,7 @@
             --pastel-pink: #ffd1dc;
             --accent-pink: #ff8e91;
             --text-dark: #4a4a4a;
+            --grey: #808080;
         }
 
         body, html {
@@ -33,7 +34,7 @@
         }
         .screen.active { opacity: 1; pointer-events: auto; }
 
-        /* Фон с сердечками (как в первой версии) */
+        /* Фон с сердечками */
         .bg-pattern {
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 24 24'%3E%3Cpath fill='%23ff8e91' opacity='0.2' d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E");
         }
@@ -51,7 +52,7 @@
         .btn-paw:active { transform: scale(0.9) translateY(5px); }
 
         /* Страница 2 */
-        #screen2 { background-color: var(--pastel-pink); }
+        #s2 { background-color: var(--pastel-pink); }
         .white-canvas {
             background: white; width: 300px; height: 380px;
             border-radius: 25px; position: relative;
@@ -69,7 +70,29 @@
             100% { transform: translate(var(--tx), var(--ty)) rotate(360deg); opacity: 0; }
         }
 
-        /* Страница 4 Винил */
+        /* Страница 3 - Исправленная сетка */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            width: 90%;
+            max-width: 330px; /* Чтобы точно влезло */
+            padding: 10px;
+        }
+        .grid-item {
+            width: 100%;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        /* Последнее видео по центру */
+        .grid-item:last-child {
+            grid-column: span 2;
+            width: 50%;
+            justify-self: center;
+        }
+
+        /* Страница 4 Винил - Исправленный с твоей PNG */
         .glass-card {
             background: rgba(255, 255, 255, 0.6);
             backdrop-filter: blur(10px);
@@ -77,12 +100,12 @@
             margin: 15px; width: 85%;
         }
         .vinyl-disk {
-            width: 240px; height: 240px;
-            background: url('https://raw.githubusercontent.com/hertechlegacy/MiniProjects/main/ValentinesVinyl/assets/vinyl.png') no-repeat center;
+            width: 250px; height: 250px;
+            background: url('https://github.com/saioha/GIFs-/raw/refs/heads/main/%D0%9Б%D0%B5%D0%B7%20%D0%BD%D0%B0%D0%B7%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F64_20260420170959.png') no-repeat center;
             background-size: contain;
             display: flex; align-items: center; justify-content: center;
         }
-        .spinning { animation: spin 5s linear infinite; }
+        .spinning { animation: spin 4s linear infinite; }
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
         /* Страница 5 Конверт */
@@ -95,19 +118,25 @@
             width: 0; height: 0;
             border-left: 130px solid transparent;
             border-right: 130px solid transparent;
-            border-top: 90px solid #f09494;
+            border-top: 90px solid #f09494; /* Темнее */
             position: absolute; top: 0; left: 0; z-index: 3;
             transform-origin: top; transition: transform 0.6s;
         }
         .env-flap.open { transform: rotateX(180deg); }
-        .letter-paper {
-            width: 240px; height: 0; background: #fff9e6;
-            position: absolute; bottom: 10px; left: 10px;
-            transition: all 0.8s ease; z-index: 1;
-            padding: 0 20px; overflow-y: auto; box-sizing: border-box;
-            border: 1px solid #ddd;
+
+        /* То самое Желтое Письмо на весь экран */
+        .letter-screen {
+            position: fixed; /* На весь экран */
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #fff9e6; /* Тот самый желтый */
+            display: none; /* Изначально скрыто */
+            flex-direction: column; align-items: center;
+            z-index: 10; padding: 40px 20px; box-sizing: border-box;
+            overflow-y: auto; text-align: left;
+            opacity: 0; transition: opacity 0.8s ease;
         }
-        .letter-paper.active { height: 450px; bottom: 100px; padding: 30px 20px; }
+        .letter-screen.show { display: flex; opacity: 1; }
+        .letter-screen p { white-space: pre-line; margin: 0; line-height: 1.6; }
 
         /* Последняя страница */
         .kiss { position: absolute; font-size: 40px; animation: kissAnim 1.5s forwards; }
@@ -118,8 +147,8 @@
         }
 
         /* Видео */
-        .video-wrap { width: 280px; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        video { width: 100%; display: block; }
+        .video-wrap { width: 100%; height: 100%; }
+        video { width: 100%; height: 100%; display: block; object-fit: cover; }
     </style>
 </head>
 <body class="bg-pattern">
@@ -132,7 +161,7 @@
         <h1 style="font-size: 20px; padding: 0 20px;">привет, Лёля! <br> Не ожидал такого от меня?</h1>
         <p>жми кнопочку)</p>
         <button class="btn-paw" onclick="go(2)"></button>
-        <div class="video-wrap">
+        <div class="video-wrap" style="width:280px; height:auto; border-radius:20px; overflow:hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
             <video autoplay loop muted playsinline><source src="https://github.com/saioha/GIFs-/raw/refs/heads/main/IMG_4769-ezgif.com-gif-to-mp4-converter.mp4" type="video/mp4"></video>
         </div>
     </div>
@@ -149,18 +178,19 @@
     </div>
 
     <div id="s3" class="screen bg-pattern">
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; width:90%;">
-            <div class="video-wrap"><video autoplay loop muted playsinline><source src="https://github.com/saioha/GIFs-/raw/refs/heads/main/5F9D3EE4-6622-450D-B492-A4C40DE22DA8-ezgif.com-gif-to-mp4-converter.mp4" type="video/mp4"></video></div>
-            <div class="video-wrap"><video autoplay loop muted playsinline><source src="https://github.com/saioha/GIFs-/raw/refs/heads/main/4F9B18C5-3104-4044-BC51-FE65244121B5-ezgif.com-gif-to-mp4-converter.mp4" type="video/mp4"></video></div>
-            <div class="video-wrap"><video autoplay loop muted playsinline><source src="https://github.com/saioha/GIFs-/raw/refs/heads/main/4028BD33-1752-4F18-9C9D-8969ABD02A5C-ezgif.com-gif-to-mp4-converter.mp4" type="video/mp4"></video></div>
-            <div class="video-wrap"><video autoplay loop muted playsinline><source src="https://github.com/saioha/GIFs-/raw/refs/heads/main/2691FB63-EDCE-4FEA-9FF6-55E896B92298-ezgif.com-gif-to-mp4-converter.mp4" type="video/mp4"></video></div>
+        <div class="grid-container">
+            <div class="grid-item video-wrap"><video autoplay loop muted playsinline><source src="https://github.com/saioha/GIFs-/raw/refs/heads/main/5F9D3EE4-6622-450D-B492-A4C40DE22DA8-ezgif.com-gif-to-mp4-converter.mp4" type="video/mp4"></video></div>
+            <div class="grid-item video-wrap"><video autoplay loop muted playsinline><source src="https://github.com/saioha/GIFs-/raw/refs/heads/main/4F9B18C5-3104-4044-BC51-FE65244121B5-ezgif.com-gif-to-mp4-converter.mp4" type="video/mp4"></video></div>
+            <div class="grid-item video-wrap"><video autoplay loop muted playsinline><source src="https://github.com/saioha/GIFs-/raw/refs/heads/main/4028BD33-1752-4F18-9C9D-8969ABD02A5C-ezgif.com-gif-to-mp4-converter.mp4" type="video/mp4"></video></div>
+            <div class="grid-item video-wrap"><video autoplay loop muted playsinline><source src="https://github.com/saioha/GIFs-/raw/refs/heads/main/2691FB63-EDCE-4FEA-9FF6-55E896B92298-ezgif.com-gif-to-mp4-converter.mp4" type="video/mp4"></video></div>
+            <div class="grid-item video-wrap"><video autoplay loop muted playsinline><source src="https://github.com/saioha/GIFs-/raw/refs/heads/main/07922ED7-1077-4810-874E-B26A53D5CE92-ezgif.com-gif-to-mp4-converter.mp4" type="video/mp4"></video></div>
         </div>
         <h2 style="font-size:18px; margin-top:20px;">мы в разных вселенных</h2>
         <button class="btn-paw" onclick="go(4)"></button>
     </div>
 
     <div id="s4" class="screen bg-pattern">
-        <div class="vinyl-disk" id="disk" onclick="playMusic()"></div>
+        <div class="vinyl-disk spin-obj" id="disk" onclick="playMusic()"></div>
         <div class="glass-card">
             <h3 style="margin:0;">Sweater Weather</h3>
             <p style="margin:5px 0 0 0; opacity:0.7;">The Neighbourhood</p>
@@ -170,15 +200,16 @@
 
     <div id="s5" class="screen bg-pattern">
         <p>а тут я стишок написала</p>
-        <div class="env-container">
+        <div class="env-container" id="envelope-area">
             <div class="env-flap" id="flap"></div>
-            <div class="letter-paper" id="paper">
-                <p id="poem-text" style="text-align:left; white-space:pre-line;"></p>
-            </div>
             <div class="env-bottom"></div>
         </div>
-        <button id="look-btn" style="background:#ffd1dc; border:none; padding:10px 20px; border-radius:20px; margin-top:15px; font-family:'Comfortaa';" onclick="openEnv()">посмотреть</button>
-        <button class="btn-paw" id="next5" style="display:none;" onclick="go(6)"></button>
+        <button id="look-btn" style="background:#ffd1dc; border:none; padding:10px 20px; border-radius:20px; margin-top:15px; font-family:'Comfortaa'; color:var(--grey); cursor:pointer;" onclick="openEnv()">посмотреть</button>
+        
+        <div id="letter-screen" class="letter-screen">
+            <p id="poem-text"></p>
+            <button class="btn-paw" style="position:fixed; bottom:20px; right:20px;" onclick="go(6)"></button>
+        </div>
     </div>
 
     <div id="s6" class="screen bg-pattern">
@@ -252,6 +283,11 @@
         let cur = 1;
 
         function go(n) {
+            // Если мы на весь экран открыли письмо, закрываем его
+            if(cur === 5) {
+                document.getElementById('letter-screen').classList.remove('show');
+            }
+            
             document.getElementById(`s${cur}`).classList.remove('active');
             setTimeout(() => {
                 document.getElementById(`s${n}`).classList.add('active');
@@ -294,9 +330,9 @@
         function openEnv() {
             document.getElementById('flap').classList.add('open');
             setTimeout(() => {
-                document.getElementById('paper').classList.add('active');
+                // Плавно проявляем письмо на весь экран
+                document.getElementById('letter-screen').classList.add('show');
                 document.getElementById('look-btn').style.display = 'none';
-                document.getElementById('next5').style.display = 'inline-block';
             }, 600);
         }
 
@@ -309,9 +345,10 @@
                 k.style.left = Math.random()*90 + '%';
                 k.style.top = Math.random()*80 + '%';
                 document.getElementById('s6').appendChild(k);
-                setTimeout(() => k.remove(), 1500);
+                setTimeout(() => k.remove(), 1.5s);
             }, 500);
         }
     </script>
 </body>
 </html>
+
