@@ -28,9 +28,8 @@
             width: 100%; height: 100%;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             opacity: 0; pointer-events: none;
-            transition: opacity 0.6s ease;
+            transition: opacity 0.5s ease;
             text-align: center; box-sizing: border-box;
-            z-index: 1;
         }
         .screen.active { opacity: 1; pointer-events: auto; }
 
@@ -39,174 +38,168 @@
         }
 
         .btn-paw {
-            width: 80px; height: 80px;
+            width: 85px; height: 85px;
             background: url('https://github.com/saioha/GIFs-/raw/refs/heads/main/IMG_4774.png') no-repeat center;
             background-size: contain;
             border: none; cursor: pointer;
-            filter: drop-shadow(0 10px 5px rgba(0,0,0,0.1));
+            filter: drop-shadow(0 8px 4px rgba(0,0,0,0.15));
             transition: transform 0.2s;
-            margin: 20px;
-            position: relative;
-            z-index: 10; /* Кнопка ВСЕГДА сверху */
+            z-index: 999; /* Поверх всего */
+            margin: 10px;
         }
-        .btn-paw:active { transform: scale(0.9); }
+        .btn-paw:active { transform: scale(0.9) translateY(4px); }
 
         /* Страница 2 */
         #s2 { background-color: var(--pastel-pink); }
         .white-canvas {
-            background: white; width: 300px; height: 380px;
-            border-radius: 25px; position: relative;
+            background: white; width: 310px; height: 380px;
+            border-radius: 30px; position: relative;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.05);
         }
-        #draw-svg { width: 180px; height: 180px; z-index: 5; position: relative;}
         .moving-heart {
-            position: absolute; color: #ffb1c1; font-size: 14px;
-            animation: float 6s infinite linear; z-index: 1;
+            position: absolute; color: #ffb1c1; font-size: 16px;
+            animation: floatHeart 7s infinite linear; z-index: 1;
         }
-        @keyframes float {
-            0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
-            50% { opacity: 0.8; }
-            100% { transform: translate(var(--tx), var(--ty)) rotate(360deg); opacity: 0; }
+        @keyframes floatHeart {
+            0% { transform: translate(0,0) rotate(0deg); opacity:0; }
+            20% { opacity: 0.8; }
+            80% { opacity: 0.8; }
+            100% { transform: translate(var(--tx), var(--ty)) rotate(360deg); opacity:0; }
         }
 
-        /* Страница 3 - Сетка */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            width: 90%;
-            max-width: 320px;
-            padding: 10px;
-        }
-        .grid-item {
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        /* Видео контейнеры (как в 1 версии) */
+        .video-box {
+            width: 85%; max-width: 280px;
+            border-radius: 20px; overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             background: #000;
-            aspect-ratio: 9/16;
         }
-        .grid-item:last-child {
-            grid-column: span 2;
-            width: 50%;
-            justify-self: center;
-        }
+        video { width: 100%; display: block; }
 
-        /* Страница 4 Винил */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(10px);
-            padding: 15px; border-radius: 20px;
-            margin: 15px; width: 80%;
+        /* Сетка Вселенных */
+        .universe-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 10px; width: 90%; max-width: 320px;
+            margin-bottom: 15px;
         }
-        .vinyl-disk {
-            width: 240px; height: 240px;
+        .grid-v { border-radius: 12px; overflow: hidden; background: #000; }
+        .grid-v:last-child { grid-column: span 2; width: 50%; justify-self: center; }
+
+        /* Винил */
+        .vinyl-container {
+            width: 260px; height: 260px;
             background: url('https://github.com/saioha/GIFs-/raw/refs/heads/main/%D0%9Б%D0%B5%D0%B7%20%D0%BD%D0%B0%D0%B7%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F64_20260420170959.png') no-repeat center;
-            background-size: contain;
+            background-size: contain; margin-bottom: 20px;
         }
-        .spinning { animation: spin 4s linear infinite; }
-        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .spinning { animation: spinVinyl 4s linear infinite; }
+        @keyframes spinVinyl { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .glass-player {
+            background: rgba(255,255,255,0.5); backdrop-filter: blur(8px);
+            padding: 15px 25px; border-radius: 20px; width: 80%;
+        }
 
-        /* Страница 5 */
-        .env-container { position: relative; width: 260px; height: 180px; margin-bottom: 20px;}
-        .env-bottom { width: 100%; height: 100%; background: #ffb3b3; border-radius: 5px; position: absolute; bottom: 0; z-index: 2; }
-        .env-flap {
+        /* Конверт */
+        .env-box { position: relative; width: 240px; height: 160px; margin-bottom: 20px; }
+        .env-base { width: 100%; height: 100%; background: #ffb3b3; border-radius: 4px; position: absolute; bottom: 0; z-index: 2; }
+        .env-top {
             width: 0; height: 0;
-            border-left: 130px solid transparent; border-right: 130px solid transparent;
-            border-top: 90px solid #f09494;
+            border-left: 120px solid transparent; border-right: 120px solid transparent;
+            border-top: 85px solid #f09494;
             position: absolute; top: 0; left: 0; z-index: 3;
             transform-origin: top; transition: transform 0.6s;
         }
-        .env-flap.open { transform: rotateX(180deg); }
+        .env-top.open { transform: rotateX(180deg); }
 
-        .letter-screen {
+        /* Желтое письмо */
+        #letter-view {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #fff9e6; display: none; flex-direction: column;
-            z-index: 100; padding: 40px 25px; box-sizing: border-box;
-            overflow-y: auto; text-align: left; opacity: 0; transition: opacity 0.5s;
+            background: #fff9e6; z-index: 1000; display: none;
+            flex-direction: column; padding: 45px 25px; box-sizing: border-box;
+            overflow-y: scroll; opacity: 0; transition: opacity 0.5s;
         }
-        .letter-screen.show { display: flex; opacity: 1; }
+        #letter-view.active { display: flex; opacity: 1; }
 
         /* Поцелуи */
-        .kiss { position: absolute; font-size: 40px; animation: kissAnim 1.5s forwards; pointer-events: none; }
-        @keyframes kissAnim { 
-            0% { transform: scale(0); opacity: 0; } 
-            50% { opacity: 1; } 
-            100% { transform: scale(1.5) translateY(-60px); opacity: 0; } 
+        .kiss-mark { position: absolute; font-size: 45px; animation: kissOut 1.5s forwards; pointer-events: none; }
+        @keyframes kissOut {
+            0% { transform: scale(0); opacity: 0; }
+            40% { opacity: 1; }
+            100% { transform: scale(1.4) translateY(-80px); opacity: 0; }
         }
-
-        video { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
     </style>
 </head>
 <body class="bg-pattern">
 
-    <audio id="player" loop>
+    <audio id="music" loop>
         <source src="https://github.com/saioha/GIFs-/raw/refs/heads/main/Sweater-Weather-The-Neighbourhood.mp3" type="audio/mpeg">
     </audio>
 
-    <div id="s1" class="screen active bg-pattern">
-        <h1 style="font-size: 18px;">привет, Лёля! <br> Не ожидал такого от меня?</h1>
+    <div id="scr1" class="screen active bg-pattern">
+        <h2 style="font-size: 19px; padding: 0 15px;">привет, Лёля! <br> Не ожидал такого от меня?</h2>
         <p>жми кнопочку)</p>
-        <button class="btn-paw" onclick="go(2)"></button>
-        <div style="width:260px; height:350px; border-radius:20px; overflow:hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); position: relative; z-index: 1;">
-            <video autoplay loop muted playsinline><source src="https://github.com/saioha/GIFs-/raw/refs/heads/main/IMG_4769-ezgif.com-gif-to-mp4-converter.mp4" type="video/mp4"></video>
+        <button class="btn-paw" onclick="nav(2)"></button>
+        <div class="video-box">
+            <video autoplay loop muted playsinline preload="auto">
+                <source src="https://github.com/saioha/GIFs-/raw/refs/heads/main/IMG_4769-ezgif.com-gif-to-mp4-converter.mp4" type="video/mp4">
+            </video>
         </div>
     </div>
 
-    <div id="s2" class="screen">
-        <div class="white-canvas" id="particles-zone">
-            <svg id="draw-svg" viewBox="0 0 200 200">
-                <path id="man" fill="none" stroke="#4a4a4a" stroke-width="3" d="M100,140 Q100,100 100,70 M100,70 A15,15 0 1,1 100.1,70 M100,90 L70,110 M100,90 L130,80 M100,140 L80,180 M100,140 L120,180" stroke-dasharray="500" stroke-dashoffset="500"></path>
-                <path id="heart" fill="#ff4d6d" opacity="0" d="M135,70 Q145,50 160,70 Q175,90 135,110 Q95,90 110,70 Q125,50 135,70"></path>
+    <div id="scr2" class="screen">
+        <div class="white-canvas" id="canvas">
+            <svg viewBox="0 0 200 200" style="width:180px; z-index:10;">
+                <path id="manPath" fill="none" stroke="#4a4a4a" stroke-width="3" d="M100,140 Q100,100 100,70 M100,70 A15,15 0 1,1 100.1,70 M100,90 L70,110 M100,90 L130,80 M100,140 L80,180 M100,140 L120,180" stroke-dasharray="500" stroke-dashoffset="500"></path>
+                <path id="heartPath" fill="#ff4d6d" opacity="0" d="M135,70 Q145,50 160,70 Q175,90 135,110 Q95,90 110,70 Q125,50 135,70"></path>
             </svg>
-            <div id="iloveyou" style="opacity:0; transition:1s; color:#ff4d6d; font-weight:bold; font-size:20px; z-index:10; position: relative;">I Love You</div>
+            <div id="biuText" style="opacity:0; transition:1s; color:#ff4d6d; font-weight:bold; font-size:20px; z-index:10;">I Love You</div>
         </div>
-        <button class="btn-paw" style="position:absolute; bottom:20px; right:20px;" onclick="go(3)"></button>
+        <button class="btn-paw" style="position:absolute; bottom:20px; right:20px;" onclick="nav(3)"></button>
     </div>
 
-    <div id="s3" class="screen bg-pattern">
-        <div class="grid-container">
-            <div class="grid-item"><video autoplay loop muted playsinline><source src="https://github.com/saioha/GIFs-/raw/refs/heads/main/5F9D3EE4-6622-450D-B492-A4C40DE22DA8-ezgif.com-gif-to-mp4-converter.mp4" type="video/mp4"></video></div>
-            <div class="grid-item"><video autoplay loop muted playsinline><source src="https://github.com/saioha/GIFs-/raw/refs/heads/main/4F9B18C5-3104-4044-BC51-FE65244121B5-ezgif.com-gif-to-mp4-converter.mp4" type="video/mp4"></video></div>
-            <div class="grid-item"><video autoplay loop muted playsinline><source src="https://github.com/saioha/GIFs-/raw/refs/heads/main/4028BD33-1752-4F18-9C9D-8969ABD02A5C-ezgif.com-gif-to-mp4-converter.mp4" type="video/mp4"></video></div>
-            <div class="grid-item"><video autoplay loop muted playsinline><source src="https://github.com/saioha/GIFs-/raw/refs/heads/main/2691FB63-EDCE-4FEA-9FF6-55E896B92298-ezgif.com-gif-to-mp4-converter.mp4" type="video/mp4"></video></div>
-            <div class="grid-item"><video autoplay loop muted playsinline><source src="https://github.com/saioha/GIFs-/raw/refs/heads/main/07922ED7-1077-4810-874E-B26A53D5CE92-ezgif.com-gif-to-mp4-converter.mp4" type="video/mp4"></video></div>
+    <div id="scr3" class="screen bg-pattern">
+        <div class="universe-grid">
+            <div class="grid-v"><video autoplay loop muted playsinline><source src="https://github.com/saioha/GIFs-/raw/refs/heads/main/5F9D3EE4-6622-450D-B492-A4C40DE22DA8-ezgif.com-gif-to-mp4-converter.mp4" type="video/mp4"></video></div>
+            <div class="grid-v"><video autoplay loop muted playsinline><source src="https://github.com/saioha/GIFs-/raw/refs/heads/main/4F9B18C5-3104-4044-BC51-FE65244121B5-ezgif.com-gif-to-mp4-converter.mp4" type="video/mp4"></video></div>
+            <div class="grid-v"><video autoplay loop muted playsinline><source src="https://github.com/saioha/GIFs-/raw/refs/heads/main/4028BD33-1752-4F18-9C9D-8969ABD02A5C-ezgif.com-gif-to-mp4-converter.mp4" type="video/mp4"></video></div>
+            <div class="grid-v"><video autoplay loop muted playsinline><source src="https://github.com/saioha/GIFs-/raw/refs/heads/main/2691FB63-EDCE-4FEA-9FF6-55E896B92298-ezgif.com-gif-to-mp4-converter.mp4" type="video/mp4"></video></div>
+            <div class="grid-v"><video autoplay loop muted playsinline><source src="https://github.com/saioha/GIFs-/raw/refs/heads/main/07922ED7-1077-4810-874E-B26A53D5CE92-ezgif.com-gif-to-mp4-converter.mp4" type="video/mp4"></video></div>
         </div>
         <h2 style="font-size:16px;">мы в разных вселенных</h2>
-        <button class="btn-paw" onclick="go(4)"></button>
+        <button class="btn-paw" onclick="nav(4)"></button>
     </div>
 
-    <div id="s4" class="screen bg-pattern">
-        <div class="vinyl-disk" id="disk" onclick="playMusic()"></div>
-        <div class="glass-card">
-            <h3 style="margin:0; font-size: 16px;">Sweater Weather</h3>
-            <p style="margin:5px 0 0 0; opacity:0.7; font-size: 14px;">The Neighbourhood</p>
+    <div id="scr4" class="screen bg-pattern">
+        <div class="vinyl-container" id="v-disk" onclick="handleMusic()"></div>
+        <div class="glass-player">
+            <h3 style="margin:0; font-size:16px;">Sweater Weather</h3>
+            <p style="margin:5px 0 0 0; opacity:0.7; font-size:13px;">The Neighbourhood</p>
         </div>
-        <button class="btn-paw" onclick="go(5)"></button>
+        <button class="btn-paw" onclick="nav(5)"></button>
     </div>
 
-    <div id="s5" class="screen bg-pattern">
+    <div id="scr5" class="screen bg-pattern">
         <p>а тут я стишок написала</p>
-        <div class="env-container">
-            <div class="env-flap" id="flap"></div>
-            <div class="env-bottom"></div>
+        <div class="env-box">
+            <div class="env-top" id="e-top"></div>
+            <div class="env-base"></div>
         </div>
-        <button id="look-btn" style="background:#ffd1dc; border:none; padding:12px 25px; border-radius:25px; font-family:'Comfortaa'; color:var(--grey); z-index:10;" onclick="openEnv()">посмотреть</button>
+        <button id="btn-open" style="background:var(--pastel-pink); border:none; padding:12px 28px; border-radius:25px; font-family:'Comfortaa'; color:var(--grey);" onclick="openLetter()">посмотреть</button>
         
-        <div id="letter-screen" class="letter-screen">
-            <p id="poem-text" style="font-size: 14px; color: #555;"></p>
-            <button class="btn-paw" style="position:fixed; bottom:20px; right:20px;" onclick="go(6)"></button>
+        <div id="letter-view">
+            <p id="poem" style="line-height:1.6; color:#444; font-size:14px;"></p>
+            <button class="btn-paw" style="position:fixed; bottom:25px; right:25px;" onclick="nav(6)"></button>
         </div>
     </div>
 
-    <div id="s6" class="screen bg-pattern">
-        <h2 style="padding:0 30px; font-size:18px;">спасибо котик за наш год, я люблю тебя с каждым днем все сильнее🩷</h2>
+    <div id="scr6" class="screen bg-pattern">
+        <h2 style="padding:0 30px; font-size:18px; line-height:1.4;">спасибо котик за наш год, я люблю тебя с каждым днем все сильнее🩷</h2>
         <button class="btn-paw" onclick="location.reload()"></button>
-        <p style="font-size:12px; color:var(--accent-pink);">пересмотреть</p>
+        <p style="font-size:12px; color:var(--accent-pink); margin-top: -10px;">пересмотреть</p>
     </div>
 
     <script>
-        const stext = `Прости за глупости, что наговорила,
+        const text = `Прости за глупости, что наговорила,
 за резкость, что вышла случайно.
 Я так не думаю, правда, поверь —
 это всё было слишком отчаянно.
@@ -266,68 +259,68 @@
 Потому что всё, что у нас есть сейчас, —
 слишком живое, чтобы стать прошлым.`;
 
-        document.getElementById('poem-text').innerText = stext;
-        let cur = 1;
+        document.getElementById('poem').innerText = text;
+        let c = 1;
 
-        function go(n) {
-            if(cur === 5) document.getElementById('letter-screen').classList.remove('show');
-            document.getElementById(`s${cur}`).classList.remove('active');
+        function nav(n) {
+            if(c === 5) document.getElementById('letter-view').classList.remove('active');
+            document.getElementById(`scr${c}`).classList.remove('active');
             setTimeout(() => {
-                document.getElementById(`s${n}`).classList.add('active');
-                cur = n;
-                if(n === 2) startAnim();
-                if(n === 6) startKisses();
+                document.getElementById(`scr${n}`).classList.add('active');
+                c = n;
+                if(n === 2) doDraw();
+                if(n === 6) doKisses();
             }, 500);
         }
 
-        function startAnim() {
-            const m = document.getElementById('man');
+        function doDraw() {
+            const m = document.getElementById('manPath');
             m.style.transition = 'stroke-dashoffset 2s linear';
             m.style.strokeDashoffset = '0';
             setTimeout(() => {
-                document.getElementById('heart').style.opacity = '1';
-                document.getElementById('iloveyou').style.opacity = '1';
-                for(let i=0; i<20; i++) spawnHeart();
-            }, 2200);
+                document.getElementById('heartPath').style.opacity = '1';
+                document.getElementById('biuText').style.opacity = '1';
+                for(let i=0; i<25; i++) makeHeart();
+            }, 2100);
         }
 
-        function spawnHeart() {
-            const zone = document.getElementById('particles-zone');
+        function makeHeart() {
+            const canvas = document.getElementById('canvas');
             const h = document.createElement('div');
             h.className = 'moving-heart';
             h.innerHTML = '❤️';
-            h.style.left = Math.random() * 100 + '%';
-            h.style.top = Math.random() * 100 + '%';
-            h.style.setProperty('--tx', (Math.random()-0.5)*200+'px');
-            h.style.setProperty('--ty', (Math.random()-0.5)*200+'px');
-            zone.appendChild(h);
+            h.style.left = Math.random() * 90 + 5 + '%';
+            h.style.top = Math.random() * 90 + 5 + '%';
+            h.style.setProperty('--tx', (Math.random()-0.5)*250+'px');
+            h.style.setProperty('--ty', (Math.random()-0.5)*250+'px');
+            canvas.appendChild(h);
         }
 
-        function playMusic() {
-            const a = document.getElementById('player');
-            const d = document.getElementById('disk');
+        function handleMusic() {
+            const a = document.getElementById('music');
+            const d = document.getElementById('v-disk');
             if(a.paused) { a.play(); d.classList.add('spinning'); }
             else { a.pause(); d.classList.remove('spinning'); }
         }
 
-        function openEnv() {
-            document.getElementById('flap').classList.add('open');
+        function openLetter() {
+            document.getElementById('e-top').classList.add('open');
             setTimeout(() => {
-                document.getElementById('letter-screen').classList.add('show');
+                document.getElementById('letter-view').classList.add('active');
             }, 600);
         }
 
-        function startKisses() {
+        function doKisses() {
             setInterval(() => {
-                if(cur !== 6) return;
+                if(c !== 6) return;
                 const k = document.createElement('div');
-                k.className = 'kiss';
+                k.className = 'kiss-mark';
                 k.innerHTML = '💋';
-                k.style.left = Math.random()*90 + '%';
+                k.style.left = Math.random()*85 + '%';
                 k.style.top = Math.random()*80 + '%';
-                document.getElementById('s6').appendChild(k);
+                document.getElementById('scr6').appendChild(k);
                 setTimeout(() => k.remove(), 1500);
-            }, 500);
+            }, 450);
         }
     </script>
 </body>
