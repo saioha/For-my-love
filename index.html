@@ -44,13 +44,13 @@
             border: none; cursor: pointer;
             filter: drop-shadow(0 8px 4px rgba(0,0,0,0.15));
             transition: transform 0.2s;
-            z-index: 999; /* Поверх всего */
+            z-index: 999;
             margin: 10px;
         }
         .btn-paw:active { transform: scale(0.9) translateY(4px); }
 
         /* Страница 2 */
-        #s2 { background-color: var(--pastel-pink); }
+        #scr2 { background-color: var(--pastel-pink); }
         .white-canvas {
             background: white; width: 310px; height: 380px;
             border-radius: 30px; position: relative;
@@ -68,7 +68,7 @@
             100% { transform: translate(var(--tx), var(--ty)) rotate(360deg); opacity:0; }
         }
 
-        /* Видео контейнеры (как в 1 версии) */
+        /* Видео */
         .video-box {
             width: 85%; max-width: 280px;
             border-radius: 20px; overflow: hidden;
@@ -83,14 +83,16 @@
             gap: 10px; width: 90%; max-width: 320px;
             margin-bottom: 15px;
         }
-        .grid-v { border-radius: 12px; overflow: hidden; background: #000; }
+        .grid-v { border-radius: 12px; overflow: hidden; background: #000; aspect-ratio: 9/16; }
         .grid-v:last-child { grid-column: span 2; width: 50%; justify-self: center; }
 
-        /* Винил */
+        /* Винил - ИСПРАВЛЕНО */
         .vinyl-container {
-            width: 260px; height: 260px;
-            background: url('https://github.com/saioha/GIFs-/raw/refs/heads/main/%D0%9Б%D0%B5%D0%B7%20%D0%BD%D0%B0%D0%B7%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F64_20260420170959.png') no-repeat center;
-            background-size: contain; margin-bottom: 20px;
+            width: 250px; height: 250px;
+            background: url('https://raw.githubusercontent.com/saioha/GIFs-/main/%D0%91%D0%B5%D0%B7%20%D0%BD%D0%B0%D0%B7%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F64_20260420170959.png') no-repeat center;
+            background-size: contain;
+            margin-bottom: 20px;
+            border-radius: 50%;
         }
         .spinning { animation: spinVinyl 4s linear infinite; }
         @keyframes spinVinyl { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
@@ -111,7 +113,7 @@
         }
         .env-top.open { transform: rotateX(180deg); }
 
-        /* Желтое письмо */
+        /* Письмо */
         #letter-view {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #fff9e6; z-index: 1000; display: none;
@@ -120,11 +122,9 @@
         }
         #letter-view.active { display: flex; opacity: 1; }
 
-        /* Поцелуи */
         .kiss-mark { position: absolute; font-size: 45px; animation: kissOut 1.5s forwards; pointer-events: none; }
         @keyframes kissOut {
             0% { transform: scale(0); opacity: 0; }
-            40% { opacity: 1; }
             100% { transform: scale(1.4) translateY(-80px); opacity: 0; }
         }
     </style>
@@ -140,9 +140,7 @@
         <p>жми кнопочку)</p>
         <button class="btn-paw" onclick="nav(2)"></button>
         <div class="video-box">
-            <video autoplay loop muted playsinline preload="auto">
-                <source src="https://github.com/saioha/GIFs-/raw/refs/heads/main/IMG_4769-ezgif.com-gif-to-mp4-converter.mp4" type="video/mp4">
-            </video>
+            <video autoplay loop muted playsinline><source src="https://github.com/saioha/GIFs-/raw/refs/heads/main/IMG_4769-ezgif.com-gif-to-mp4-converter.mp4" type="video/mp4"></video>
         </div>
     </div>
 
@@ -185,17 +183,15 @@
             <div class="env-base"></div>
         </div>
         <button id="btn-open" style="background:var(--pastel-pink); border:none; padding:12px 28px; border-radius:25px; font-family:'Comfortaa'; color:var(--grey);" onclick="openLetter()">посмотреть</button>
-        
         <div id="letter-view">
-            <p id="poem" style="line-height:1.6; color:#444; font-size:14px;"></p>
+            <p id="poem" style="line-height:1.6; color:#444; font-size:14px; white-space:pre-line;"></p>
             <button class="btn-paw" style="position:fixed; bottom:25px; right:25px;" onclick="nav(6)"></button>
         </div>
     </div>
 
     <div id="scr6" class="screen bg-pattern">
-        <h2 style="padding:0 30px; font-size:18px; line-height:1.4;">спасибо котик за наш год, я люблю тебя с каждым днем все сильнее🩷</h2>
+        <h2 style="padding:0 30px; font-size:18px;">спасибо котик за наш год, я люблю тебя с каждым днем все сильнее🩷</h2>
         <button class="btn-paw" onclick="location.reload()"></button>
-        <p style="font-size:12px; color:var(--accent-pink); margin-top: -10px;">пересмотреть</p>
     </div>
 
     <script>
@@ -325,3 +321,4 @@
     </script>
 </body>
 </html>
+
