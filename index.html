@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Для Лёли ❤️</title>
+    <style>
+        :root {
+            --milk: #fdfaf5;
+            --pink: #ff8e91;
+            --dark-pink: #880e4f;
+            --text-color: #4a4a4a;
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            width: 100%; height: 100%;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            overflow: hidden;
+            background-color: var(--milk);
+        }
+
+        /* Общие стили страниц */
+        .screen {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.8s ease-in-out;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .screen.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Паттерн сердечек для молочного фона */
+        .bg-hearts {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%23ff8e91' opacity='0.2' d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E");
+        }
+
+        h1, h2 { color: var(--text-color); font-weight: 600; margin-bottom: 20px; }
+
+        /* Кнопка Лапка */
+        .btn-paw {
+            background: none; border: none;
+            cursor: pointer;
+            width: 80px; height: 80px;
+            transition: transform 0.2s;
+            -webkit-tap-highlight-color: transparent;
+            margin-top: 20px;
+        }
+        .btn-paw:active { transform: scale(0.9); }
+        .btn-paw svg { fill: var(--pink); filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1)); }
+
+        /* Видео контейнеры */
+        .video-box {
+            width: 90%; max-width: 320px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        video { width: 100%; display: block; }
+
+        /* --- СТРАНИЦА 2: Анимация рисования --- */
+        #screen2 { background-color: var(--dark-pink); }
+        .canvas-container {
+            background: white;
+            width: 320px; height: 350px;
+            border-radius: 30px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        #drawing-svg { width: 200px; height: 200px; }
+        .biu-text { 
+            font-family: 'Georgia', serif; 
+            font-size: 24px; 
+            color: #ff4d6d; 
+            margin-top: 10px;
+            opacity: 0;
+            transition: opacity 1s;
+        }
+
+        /* --- СТРАНИЦА 3: Сетка гифок --- */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            width: 100%;
+            max-width: 350px;
+        }
+        .grid-item { opacity: 0; transform: translateY(20px); transition: 0.5s; }
+        .grid-item.show { opacity: 1; transform: translateY(0); }
+
+        /* --- СТРАНИЦА 4: Винил --- */
+        .vinyl-container { position: relative; width: 250px; height: 250px; }
+        .vinyl-disk {
+            width: 100%; height: 100%;
+            background: #111;
+            border-radius: 50%;
+            border: 5px solid #222;
+            box-shadow: 0 0 20px rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .vinyl-center {
+            width: 80px; height: 80px;
+            background: var(--pink);
+            border-radius: 50%;
+            border: 4px solid #333;
+        }
+        .spinning { animation: rotate 3s linear infinite; }
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        /* --- СТРАНИЦА 5: Конверт и Стих --- */
+        .envelope {
+            width: 200px; height: 130px;
+            background: #ffb3b3;
+            position: relative;
+            cursor: pointer;
+            margin-top: 20px;
+            border-radius: 0 0 10px 10px;
+        }
+        .envelope::before {
+            content: '';
+            position: absolute; top: -70px; left: 0;
+            border-left: 100px solid transparent;
+            border-right: 100px solid transparent;
+            border-bottom: 70px solid #ffb3b3;
+        }
+        .letter {
+            width: 90%; max-height: 0;
+            background: #fdf5e6;
+            margin: 0 auto;
+            overflow-y: auto;
+            transition: max-height 1s ease-in-out;
+            padding: 0 15px;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.05);
+            border-radius: 5px;
+            text-align: left;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+        }
+        .letter.open { max-height: 400px; padding: 20px 15px; margin-top: 20px; }
+
+        .kiss-mark { font-size: 40px; }
+    </style>
+</head>
+<body class="bg-hearts">
+
+    <audio id="bg-music" loop>
+        <source src="https://github.com/saioha/GIFs-/raw/refs/heads/main/Sweater-Weather-The-Neighbourhood.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="screen1" class="screen active">
+        <h1>привет, Лёля! <br> Не ожидал такого от меня?</h1>
+        <p>жми кнопочку)</p>
+        <button class="btn-paw" onclick="nextScreen(2)">
+            <svg viewBox="0 0 512 512"><path d="M256 160c-26.5 0-48 21.5-48 48s21.5 48 48 48 48-21.5 48-48-21.5-48-48-48zm132.5 42c-23.3-15.5-54.6-8.8-69.8 14.3l-10.3 15.4c-15.5 23.3-8.8 54.6 14.3 69.8 23.3 15.5 54.6 8.8 69.8-14.3l10.3-15.4c15.6-23.4 8.9-54.7-14.3-69.8zm-265 0c-23.3 15.5-30 46.8-14.4 70.1l10.3 15.4c15.5 23.3 46.8 30 70.1 14.4 23.3-15.5 30-46.8 14.4-70.1l-10.3-15.4c-15.5-23.3-46.8-30-70.1-14.4zM256 288c-44.2 0-80 35.8-80 80 0 60.3 80 128 80 128s80-67.7 80-128c0-44.2-35.8-80-80-80z"/></svg>
+        </button>
+        <div class="video-box" style="margin-top: 30px;">
+            <video autoplay loop muted playsinline>
+                <source src="https://github.com/saioha/GIFs-/raw/refs/heads/main/IMG_4769-ezgif.com-gif-to-mp4-converter.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+
+    <div id="screen2" class="screen">
+        <div class="canvas-container">
+            <svg id="drawing-svg" viewBox="0 0 200 200">
+                <path id="man" fill="none" stroke="#4a4a4a" stroke-width="3" d="M100,140 Q100,100 100,70 M100,70 A15,15 0 1,1 100.1,70 M100,90 L70,110 M100,90 L130,80 M100,140 L80,180 M100,140 L120,180" stroke-dasharray="500" stroke-dashoffset="500"></path>
+                <path id="heart-outline" fill="#ff4d6d" opacity="0" d="M135,70 Q145,50 160,70 Q175,90 135,110 Q95,90 110,70 Q125,50 135,70"></path>
+            </svg>
+            <div id="biu" class="biu-text">I Love You</div>
+        </div>
+        <button class="btn-paw" style="position: absolute; bottom: 30px; right: 30px;" onclick="nextScreen(3)">
+            <svg viewBox="0 0 512 512"><path d="M256 160c-26.5 0-48 21.5-48 48s21.5 48 48 48 48-21.5 48-48-21.5-48-48-48zm132.5 42c-23.3-15.5-54.6-8.8-69.8 14.3l-10.3 15.4c-15.5 23.3-8.8 54.6 14.3 69.8 23.3 15.5 54.6 8.8 69.8-14.3l10.3-15.4c15.6-23.4 8.9-54.7-14.3-69.8zm-265 0c-23.3 15.5-30 46.8-14.4 70.1l10.3 15.4c15.5 23.3 46.8 30 70.1 14.4 23.3-15.5 30-46.8 14.4-70.1l-10.3-15.4c-15.5-23.3-46.8-30-70.1-14.4zM256 288c-44.2 0-80 35.8-80 80 0 60.3 80 128 80 128s80-67.7 80-128c0-44.2-35.8-80-80-80z"/></svg>
+        </button>
+    </div>
+
+    <div id="screen3" class="screen bg-hearts">
+        <div class="grid-container">
+            <div class="grid-item video-box"><video autoplay loop muted playsinline><source src="https://github.com/saioha/GIFs-/raw/refs/heads/main/5F9D3EE4-6622-450D-B492-A4C40DE22DA8-ezgif.com-gif-to-mp4-converter.mp4" type="video/mp4"></video></div>
+            <div class="grid-item video-box"><video autoplay loop muted playsinline><source src="https://github.com/saioha/GIFs-/raw/refs/heads/main/4F9B18C5-3104-4044-BC51-FE65244121B5-ezgif.com-gif-to-mp4-converter.mp4" type="video/mp4"></video></div>
+            <div class="grid-item video-box"><video autoplay loop muted playsinline><source src="https://github.com/saioha/GIFs-/raw/refs/heads/main/4028BD33-1752-4F18-9C9D-8969ABD02A5C-ezgif.com-gif-to-mp4-converter.mp4" type="video/mp4"></video></div>
+            <div class="grid-item video-box"><video autoplay loop muted playsinline><source src="https://github.com/saioha/GIFs-/raw/refs/heads/main/2691FB63-EDCE-4FEA-9FF6-55E896B92298-ezgif.com-gif-to-mp4-converter.mp4" type="video/mp4"></video></div>
+            <div class="grid-item video-box" style="grid-column: span 2; justify-self: center;"><video autoplay loop muted playsinline><source src="https://github.com/saioha/GIFs-/raw/refs/heads/main/07922ED7-1077-4810-874E-B26A53D5CE92-ezgif.com-gif-to-mp4-converter.mp4" type="video/mp4"></video></div>
+        </div>
+        <h2 style="margin-top: 20px;">мы в разных вселенных</h2>
+        <button class="btn-paw" onclick="nextScreen(4)">
+            <svg viewBox="0 0 512 512"><path d="M256 160c-26.5 0-48 21.5-48 48s21.5 48 48 48 48-21.5 48-48-21.5-48-48-48zm132.5 42c-23.3-15.5-54.6-8.8-69.8 14.3l-10.3 15.4c-15.5 23.3-8.8 54.6 14.3 69.8 23.3 15.5 54.6 8.8 69.8-14.3l10.3-15.4c15.6-23.4 8.9-54.7-14.3-69.8zm-265 0c-23.3 15.5-30 46.8-14.4 70.1l10.3 15.4c15.5 23.3 46.8 30 70.1 14.4 23.3-15.5 30-46.8 14.4-70.1l-10.3-15.4c-15.5-23.3-46.8-30-70.1-14.4zM256 288c-44.2 0-80 35.8-80 80 0 60.3 80 128 80 128s80-67.7 80-128c0-44.2-35.8-80-80-80z"/></svg>
+        </button>
+    </div>
+
+    <div id="screen4" class="screen">
+        <div class="vinyl-container" onclick="toggleMusic()">
+            <div id="disk" class="vinyl-disk">
+                <div class="vinyl-center"></div>
+            </div>
+            <p style="margin-top: 20px; font-size: 0.8rem;">(нажми на пластинку)</p>
+        </div>
+        <h2>The Neighbourhood - Sweater Weather</h2>
+        <button class="btn-paw" onclick="nextScreen(5)">
+            <svg viewBox="0 0 512 512"><path d="M256 160c-26.5 0-48 21.5-48 48s21.5 48 48 48 48-21.5 48-48-21.5-48-48-48zm132.5 42c-23.3-15.5-54.6-8.8-69.8 14.3l-10.3 15.4c-15.5 23.3-8.8 54.6 14.3 69.8 23.3 15.5 54.6 8.8 69.8-14.3l10.3-15.4c15.6-23.4 8.9-54.7-14.3-69.8zm-265 0c-23.3 15.5-30 46.8-14.4 70.1l10.3 15.4c15.5 23.3 46.8 30 70.1 14.4 23.3-15.5 30-46.8 14.4-70.1l-10.3-15.4c-15.5-23.3-46.8-30-70.1-14.4zM256 288c-44.2 0-80 35.8-80 80 0 60.3 80 128 80 128s80-67.7 80-128c0-44.2-35.8-80-80-80z"/></svg>
+        </button>
+    </div>
+
+    <div id="screen5" class="screen bg-hearts">
+        <h2>а тут я стишок написала</h2>
+        <div id="envelope" class="envelope"></div>
+        <button class="btn" style="background:var(--pink); color:white; border:none; padding:10px 20px; border-radius:20px; margin-top:10px;" onclick="openLetter()">посмотреть</button>
+        
+        <div id="letter" class="letter">
+            <p><strong>Встретимся дома</strong><br><br>
+            Прости за глупости, что наговорила,<br>за резкость, что вышла случайно.<br>Я так не думаю, правда, поверь —<br>это всё было слишком отчаянно.<br><br>
+            Давай построим вместе жизнь —<br>как в тех фильмах, что мы смотрели<br>ночами. Когда спать хотелось,<br>но мы этого не замечали.<br><br>
+            И если вселенные правда бесконечны,<br>то мы в них счастливы, конечно.<br>Пусть мы не Элисон и Ной,<br>но любим с той же глубиной.<br><br>
+            Сейчас между нами часы и пути,<br>разные окна, разные дни.<br>Но скоро жизнь станет другой.<br>Мы справимся с этим, пройдя через боль.<br><br>
+            Я помню, как мы познакомились в мае.<br>И допросы как на первом канале:<br>«Что ешь? Чем дышишь? Как спишь?»<br>Мы этим пытались заполнить тишь.<br><br>
+            С тех пор — бесконечные сообщения,<br>иногда слёзы и звонки до утра.<br>Я помню твой шёпот — моё спасение<br>и то, как ты молчишь, когда спать пора.<br><br>
+            Ты знаешь, во сколько я просыпаюсь,<br>когда у меня плохое настроение,<br>как я могу замолчать на час,<br>а потом писать без объяснения.<br><br>
+            У нас нет общих улиц и мест,<br>нет фотографий, как у других.<br>Только планы, которые мы бережём,<br>и разговоры — одни на двоих.<br><br>
+            И это, наверное, самое важное —<br>не то, что мы где-то рядом,<br>а то, что даже на расстоянии<br>мы смотрим друг на друга влюблённым взглядом.<br><br>
+            Я иногда думаю: странно —<br>так скучать по тому, кого не обнимала.<br>Но это пустяк, ведь наша любовь сильнее<br>любого экрана.<br><br>
+            Я представляю нашу первую встречу —<br>без кино, без заготовленных слов.<br>Я просто подойду и тихо скажу:<br>«Люблю…». И это будет любовь.<br><br>
+            Да, мне не нужны идеальные фразы!<br>Я просто хочу написать тебе: «Встретимся дома».<br>Потому что всё, что у нас есть сейчас, —<br>слишком живое, чтобы стать прошлым.</p>
+        </div>
+
+        <button class="btn-paw" onclick="nextScreen(6)">
+            <svg viewBox="0 0 512 512"><path d="M256 160c-26.5 0-48 21.5-48 48s21.5 48 48 48 48-21.5 48-48-21.5-48-48-48zm132.5 42c-23.3-15.5-54.6-8.8-69.8 14.3l-10.3 15.4c-15.5 23.3-8.8 54.6 14.3 69.8 23.3 15.5 54.6 8.8 69.8-14.3l10.3-15.4c15.6-23.4 8.9-54.7-14.3-69.8zm-265 0c-23.3 15.5-30 46.8-14.4 70.1l10.3 15.4c15.5 23.3 46.8 30 70.1 14.4 23.3-15.5 30-46.8 14.4-70.1l-10.3-15.4c-15.5-23.3-46.8-30-70.1-14.4zM256 288c-44.2 0-80 35.8-80 80 0 60.3 80 128 80 128s80-67.7 80-128c0-44.2-35.8-80-80-80z"/></svg>
+        </button>
+    </div>
+
+    <div id="screen6" class="screen bg-hearts">
+        <div class="kiss-mark">💋💋💋</div>
+        <h1 style="padding: 20px;">спасибо котик за наш год, <br> я люблю тебя с каждым днем все сильнее🩷</h1>
+    </div>
+
+    <script>
+        let current = 1;
+
+        function nextScreen(num) {
+            document.getElementById(`screen${current}`).classList.remove('active');
+            setTimeout(() => {
+                document.getElementById(`screen${num}`).classList.add('active');
+                current = num;
+                if(num === 2) startDrawing();
+                if(num === 3) showGrid();
+            }, 800);
+        }
+
+        function startDrawing() {
+            const man = document.getElementById('man');
+            man.style.transition = 'stroke-dashoffset 3s ease-in-out';
+            man.style.strokeDashoffset = '0';
+            setTimeout(() => {
+                document.getElementById('heart-outline').style.opacity = '1';
+                document.getElementById('biu').style.opacity = '1';
+            }, 3200);
+        }
+
+        function showGrid() {
+            const items = document.querySelectorAll('.grid-item');
+            items.forEach((item, index) => {
+                setTimeout(() => item.classList.add('show'), index * 400);
+            });
+        }
+
+        function toggleMusic() {
+            const audio = document.getElementById('bg-music');
+            const disk = document.getElementById('disk');
+            if (audio.paused) {
+                audio.play();
+                disk.classList.add('spinning');
+            } else {
+                audio.pause();
+                disk.classList.remove('spinning');
+            }
+        }
+
+        function openLetter() {
+            document.getElementById('letter').classList.toggle('open');
+        }
+    </script>
+</body>
+</html>
