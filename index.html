@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>💌 С годовщиной, Лёля! 💌</title>
-  <!-- Google Fonts: Montserrat для заголовков, Caveat для стихов -->
+  <title>💕 С годовщиной, Лёля! 💕</title>
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
@@ -17,30 +17,31 @@
 
     body {
       font-family: 'Montserrat', sans-serif;
-      background: #FFFDD0;  /* молочный фон */
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow-x: hidden;
-      touch-action: pan-y; 
+      background: #ffe4ec; /* пастельно-розовый */
+      /* красивый паттерн из сердечек */
+      background-image: url('data:image/svg+xml;utf8,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><path d="M30 42 L30 12 Q30 0 21 6 Q12 12 18 22 Q24 32 30 38 Q36 32 42 22 Q48 12 39 6 Q30 0 30 12" fill="%23ffb6c1" opacity="0.3"/></svg>');
+      background-size: 48px 48px;
+      background-repeat: repeat;
     }
 
-    /* Главный контейнер — SPA */
     .app {
       position: relative;
       width: 100%;
-      max-width: 450px;  /* комфортно для iPhone 12/16 */
+      max-width: 450px;
       margin: 0 auto;
       height: 100vh;
       max-height: 900px;
-      background: #FFFDD0;
+      background-color: transparent; /* фон задан body */
       box-shadow: 0 0 40px rgba(0,0,0,0.05);
       overflow: hidden;
-      border-radius: 0; 
+      border-radius: 0;
     }
 
-    /* Страницы — абсолютное позиционирование с плавным переходом opacity */
+    /* Страницы */
     .page {
       position: absolute;
       top: 0;
@@ -58,7 +59,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      background: #FFFDD0; /* fallback */
+      background: transparent; /* фон наследуется от body */
     }
 
     .page.active {
@@ -67,22 +68,21 @@
       z-index: 10;
     }
 
-    /* Полупрозрачные скруглённые блоки (glassmorphism) */
+    /* Glass-блоки */
     .glass-card {
-      background: rgba(255, 253, 240, 0.6);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border-radius: 32px;
-      padding: 16px 22px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.03), 0 2px 8px rgba(0,0,0,0.05);
-      border: 1px solid rgba(255,255,255,0.6);
-      margin: 12px 0;
+      background: rgba(255, 245, 240, 0.6);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 36px;
+      padding: 16px 24px;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.04), 0 2px 8px rgba(0,0,0,0.05);
+      border: 1px solid rgba(255,255,255,0.7);
+      margin: 10px 0;
       text-align: center;
       max-width: 100%;
     }
 
-    /* Шрифты */
-    h1, h2, h3, .montserrat {
+    h1, h2, h3 {
       font-family: 'Montserrat', sans-serif;
       font-weight: 600;
       letter-spacing: -0.01em;
@@ -91,29 +91,26 @@
     .handwriting {
       font-family: 'Caveat', cursive;
       font-weight: 400;
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       line-height: 1.4;
     }
 
-    /* Кнопка-лапка (навигация) */
+    /* Лапка */
     .paw-btn {
       background: transparent;
       border: none;
       cursor: pointer;
-      outline: none;
-      padding: 0;
       width: 70px;
       height: 70px;
       border-radius: 50%;
-      box-shadow: 0 0 20px rgba(255, 105, 180, 0.5), 0 4px 12px rgba(0,0,0,0.1);
-      transition: transform 0.2s;
+      box-shadow: 0 0 24px rgba(255, 105, 180, 0.6), 0 4px 12px rgba(0,0,0,0.1);
       animation: pulsePaw 2.2s infinite;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      background: rgba(255, 240, 245, 0.3);
       backdrop-filter: blur(4px);
       -webkit-backdrop-filter: blur(4px);
+      margin: 12px 0;
     }
 
     .paw-btn img {
@@ -129,26 +126,18 @@
       100% { box-shadow: 0 0 0 0 rgba(255, 105, 180, 0), 0 4px 12px rgba(0,0,0,0.1); }
     }
 
-    /* Паттерн из сердечек (для страниц 1 и 6) */
-    .hearts-bg {
-      background-color: #ffe4ec; /* пастельно-розовый */
-      background-image: url('data:image/svg+xml;utf8,<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M20 30 L20 10 Q20 2 14 6 Q8 10 12 16 Q16 22 20 26 Q24 22 28 16 Q32 10 26 6 Q20 2 20 10" fill="%23ffb6c1" opacity="0.35"/></svg>');
-      background-size: 48px 48px;
-      background-repeat: repeat;
-    }
-
-    /* Видео плеер */
-    video, .media-video {
+    /* Видео */
+    video {
       width: 100%;
       max-width: 280px;
-      border-radius: 28px;
-      box-shadow: 0 12px 28px rgba(0,0,0,0.1);
+      border-radius: 32px;
+      box-shadow: 0 16px 32px rgba(0,0,0,0.08);
       margin: 8px auto;
       display: block;
       object-fit: cover;
     }
 
-    /* Для страницы 4: сетка видео */
+    /* Сетка видео */
     .video-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -156,137 +145,139 @@
       width: 100%;
       max-width: 360px;
       margin: 10px auto;
-      justify-items: center;
-      align-items: start;
     }
-
     .video-grid video {
       width: 100%;
-      aspect-ratio: 1 / 1;
+      aspect-ratio: 1/1;
       border-radius: 20px;
-      background: #fce4ec;
-      box-shadow: 0 6px 14px rgba(0,0,0,0.05);
-      object-fit: cover;
     }
-
-    .video-grid .span-2 {
+    .span-2 {
       grid-column: span 2;
       max-width: 180px;
       justify-self: center;
     }
 
-    /* Виниловая пластинка */
+    /* Винил */
     .vinyl-wrapper {
       display: flex;
       justify-content: center;
-      align-items: center;
-      margin: 15px 0;
+      margin: 10px 0;
     }
-
     #vinylImage {
       width: 260px;
       height: 260px;
-      object-fit: contain;
       border-radius: 50%;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-      transition: box-shadow 0.3s;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
     }
-
     .spin {
       animation: rotateVinyl 4s linear infinite;
     }
-
     @keyframes rotateVinyl {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
     }
 
-    /* Конверт */
+    /* Конверт (исправлен) */
+    .envelope-container {
+      position: relative;
+      width: 240px;
+      margin: 20px auto;
+    }
     .envelope {
       position: relative;
-      width: 220px;
-      height: 150px;
-      margin: 20px auto;
+      width: 100%;
+      height: 160px;
       cursor: pointer;
-      transition: transform 0.2s;
     }
-
     .envelope-body {
       position: absolute;
       bottom: 0;
       width: 100%;
       height: 130px;
       background: #f8bbd0;
-      border-radius: 12px 12px 20px 20px;
+      border-radius: 16px 16px 24px 24px;
       box-shadow: 0 10px 20px rgba(0,0,0,0.1);
       border: 2px solid #f48fb1;
     }
-
     .envelope-flap {
       position: absolute;
-      top: 0;
+      top: 10px;       /* опущен ниже */
       left: 0;
       width: 100%;
       height: 100%;
-      clip-path: polygon(0% 0%, 100% 0%, 50% 45%);
+      clip-path: polygon(0% 0%, 100% 0%, 50% 50%);
       background: #e57399;
-      border-radius: 12px 12px 0 0;
+      border-radius: 16px 16px 0 0;
       transform-origin: top;
       transition: transform 0.5s ease;
-      box-shadow: inset 0 -4px 6px rgba(0,0,0,0.05);
       border-bottom: 2px solid #d45d79;
     }
-
     .envelope.open .envelope-flap {
       transform: rotateX(180deg);
     }
 
-    .paper {
-      position: absolute;
-      bottom: 20px;
-      left: 10%;
-      width: 80%;
-      background: #fdf5e6;
-      background-image: radial-gradient(circle at 20% 30%, rgba(210,180,140,0.1) 0%, transparent 30%);
-      padding: 18px 12px;
-      border-radius: 12px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.2), inset 0 0 0 1px #eeddcc;
-      transform: translateY(20px);
+    /* Письмо – теперь отдельный слой на весь экран */
+    .letter-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
       opacity: 0;
-      transition: all 0.45s cubic-bezier(0.2,0.9,0.4,1);
+      visibility: hidden;
+      transition: 0.3s;
+    }
+    .letter-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    .letter-paper {
+      background: #fdf5e6;
+      background-image: radial-gradient(circle at 30% 40%, rgba(210,180,140,0.15) 0%, transparent 40%);
+      width: 90%;
+      max-width: 400px;
+      max-height: 80vh;
+      padding: 24px 18px;
+      border-radius: 24px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
       font-family: 'Caveat', cursive;
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       line-height: 1.5;
       color: #3e2c1f;
-      max-height: 250px;
       overflow-y: auto;
-      pointer-events: none;
-      text-align: left;
+      border: 1px solid #ecccb0;
+      transform: scale(0.95);
+      transition: transform 0.25s;
+    }
+    .letter-overlay.show .letter-paper {
+      transform: scale(1);
+    }
+    .close-letter {
+      margin-top: 16px;
+      background: #ffb6c1;
+      border: none;
+      border-radius: 40px;
+      padding: 10px 24px;
+      font-weight: 600;
     }
 
-    .envelope.open .paper {
-      transform: translateY(-120px);
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    /* Кнопка «Посмотреть» */
+    /* Кнопка "Посмотреть" */
     .btn-pink {
       background: #ffb6c1;
       border: none;
       border-radius: 60px;
       padding: 12px 28px;
-      font-family: 'Montserrat', sans-serif;
       font-weight: 600;
       color: #4a2c2f;
       box-shadow: 0 6px 14px rgba(255,105,180,0.25);
-      backdrop-filter: blur(4px);
-      margin: 8px 0;
+      margin: 8px;
       font-size: 1.1rem;
-      border: 1px solid #ffe4e1;
     }
 
-    /* Канвас для рисования */
+    /* Канвас рисования */
     #drawingCanvas {
       display: block;
       width: 100%;
@@ -294,25 +285,17 @@
       height: auto;
       background: white;
       border-radius: 40px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-      margin: 10px auto;
-      touch-action: none;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.05);
+      margin: 8px auto;
     }
 
-    /* Подписи */
-    .caption {
-      margin-top: 6px;
-      font-weight: 500;
-    }
-
-    /* Адаптация под высокие экраны iPhone */
+    /* Адаптив */
     @media (max-height: 750px) {
-      .page { padding: 12px 12px; }
-      .glass-card { padding: 12px 16px; }
-      .paw-btn { width: 60px; height: 60px; }
+      .page { padding: 12px; }
+      .glass-card { padding: 12px 18px; }
     }
 
-    /* Кнопка пересмотреть */
+    /* Кнопка сброса */
     .reset-btn {
       background: #ffe4ec;
       border: 2px solid #ffb6c1;
@@ -321,19 +304,17 @@
       font-size: 1.3rem;
       font-weight: 700;
       color: #a53f4f;
-      box-shadow: 0 10px 20px rgba(210,100,120,0.2);
       margin: 20px 0;
     }
 
-    /* Для поцелуйчиков */
+    /* Поцелуйчики */
     .kiss {
       position: absolute;
-      font-size: 28px;
+      font-size: 30px;
       pointer-events: none;
       animation: kissFloat 2.5s ease-out forwards;
       z-index: 30;
     }
-
     @keyframes kissFloat {
       0% { opacity: 0; transform: scale(0.5) translateY(0); }
       30% { opacity: 1; transform: scale(1.2) translateY(-10px); }
@@ -341,11 +322,6 @@
       100% { opacity: 0; transform: scale(1) translateY(-60px); }
     }
 
-    /* Позиционирование лапки */
-    .paw-position {
-      margin-top: 18px;
-      align-self: center;
-    }
     .bottom-right-paw {
       position: absolute;
       bottom: 20px;
@@ -357,58 +333,39 @@
 <body>
 <div class="app">
   <!-- СТРАНИЦА 1: Приветствие -->
-  <div class="page active hearts-bg" id="page1">
-    <div style="flex:1; display: flex; flex-direction: column; align-items: center; justify-content: space-around; width: 100%;">
-      <div class="glass-card" style="margin-top: 20px;">
-        <h1 style="font-size: 2rem;">Привет, Лёля!</h1>
-        <h2 style="font-size: 1.6rem; margin-top: 6px;">С годовщиной нас! 🎉</h2>
-        <p style="margin-top: 12px; font-weight: 500;">Жми кнопочку</p>
+  <div class="page active" id="page1">
+    <div style="flex:1; display: flex; flex-direction: column; align-items: center; justify-content: space-around; width:100%;">
+      <div class="glass-card">
+        <h1 style="font-size:2rem;">Привет, Лёля!</h1>
+        <h2 style="font-size:1.5rem;">С годовщиной нас! 🎉</h2>
+        <p style="margin-top:8px;">Жми кнопочку</p>
       </div>
-      
-      <!-- Видео котика -->
-      <video id="catVideo" src="https://github.com/saioha/GIFs-/raw/refs/heads/main/IMG_4769-ezgif.com-gif-to-mp4-converter.mp4" 
-             autoplay muted loop playsinline preload="auto" 
-             style="max-width: 280px; border-radius: 40px; box-shadow: 0 16px 30px rgba(0,0,0,0.08);"></video>
-      
-      <button class="paw-btn" id="pawToPage2" aria-label="Далее">
-        <img src="https://github.com/saioha/GIFs-/raw/refs/heads/main/IMG_4774.png" alt="лапка">
-      </button>
-      <div style="height: 10px;"></div>
+      <video src="https://github.com/saioha/GIFs-/raw/refs/heads/main/IMG_4769-ezgif.com-gif-to-mp4-converter.mp4" 
+             autoplay muted loop playsinline preload="auto"></video>
+      <button class="paw-btn" id="pawToPage2"><img src="https://github.com/saioha/GIFs-/raw/refs/heads/main/IMG_4774.png" alt="лапка"></button>
     </div>
   </div>
 
-  <!-- СТРАНИЦА 2: Музыкальная пластинка -->
-  <div class="page" id="page2" style="background: #fce4ec; justify-content: center;">
-    <div class="glass-card" style="margin-bottom: 12px;">
-      <h2>🎵 Наша мелодия</h2>
-    </div>
+  <!-- СТРАНИЦА 2: Винил -->
+  <div class="page" id="page2">
+    <div class="glass-card"><h2>🎵 Наша мелодия</h2></div>
     <div class="vinyl-wrapper">
       <img id="vinylImage" src="https://github.com/saioha/GIFs-/raw/refs/heads/main/%D0%91%D0%B5%D0%B7%20%D0%BD%D0%B0%D0%B7%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F64_20260420170959.png" alt="винил">
     </div>
-    <p class="glass-card" style="font-size: 1.2rem;">Sweater Weather · The Neighbourhood</p>
-    <button class="paw-btn paw-position" id="pawToPage3">
-      <img src="https://github.com/saioha/GIFs-/raw/refs/heads/main/IMG_4774.png" alt="лапка">
-    </button>
+    <p class="glass-card">Sweater Weather · The Neighbourhood</p>
+    <button class="paw-btn" id="pawToPage3"><img src="https://github.com/saioha/GIFs-/raw/refs/heads/main/IMG_4774.png" alt="лапка"></button>
   </div>
 
-  <!-- СТРАНИЦА 3: Анимация рисования -->
-  <div class="page" id="page3" style="background: white; justify-content: flex-start; padding-top: 30px;">
-    <div class="glass-card" style="background: rgba(255,255,255,0.7); margin-bottom: 6px;">
-      <h3>✨ Нарисую тебя ✨</h3>
-    </div>
-    <canvas id="drawingCanvas" width="400" height="400" style="width: 90%; height: auto; aspect-ratio: 1/1;"></canvas>
-    <!-- надпись появится через canvas, также можно добавить текст -->
-    <div id="drawingCaption" class="handwriting" style="margin: 8px; opacity: 0; transition: opacity 0.8s; color:#b3405a;">Люблю тебя!</div>
-    <button class="paw-btn bottom-right-paw" id="pawToPage4" style="position: absolute;">
-      <img src="https://github.com/saioha/GIFs-/raw/refs/heads/main/IMG_4774.png" alt="лапка">
-    </button>
+  <!-- СТРАНИЦА 3: Рисование (без заголовка) -->
+  <div class="page" id="page3" style="justify-content: flex-start; padding-top: 30px;">
+    <canvas id="drawingCanvas" width="400" height="400"></canvas>
+    <div id="drawingCaption" class="handwriting" style="margin:6px; opacity:0; transition:0.8s; color:#b3405a;">Люблю тебя!</div>
+    <button class="paw-btn bottom-right-paw" id="pawToPage4"><img src="https://github.com/saioha/GIFs-/raw/refs/heads/main/IMG_4774.png" alt="лапка"></button>
   </div>
 
-  <!-- СТРАНИЦА 4: Видео-сетка "Вселенные" -->
-  <div class="page" id="page4" style="background: #FFFDD0; justify-content: center;">
-    <div class="glass-card" style="margin-bottom: 8px;">
-      <h2>📽️ мы в разных вселенных</h2>
-    </div>
+  <!-- СТРАНИЦА 4: Видео-сетка -->
+  <div class="page" id="page4">
+    <div class="glass-card"><h2>📽️ мы в разных вселенных</h2></div>
     <div class="video-grid">
       <video src="https://github.com/saioha/GIFs-/raw/refs/heads/main/5F9D3EE4-6622-450D-B492-A4C40DE22DA8-ezgif.com-gif-to-mp4-converter.mp4" autoplay muted loop playsinline></video>
       <video src="https://github.com/saioha/GIFs-/raw/refs/heads/main/4F9B18C5-3104-4044-BC51-FE65244121B5-ezgif.com-gif-to-mp4-converter.mp4" autoplay muted loop playsinline></video>
@@ -416,19 +373,46 @@
       <video src="https://github.com/saioha/GIFs-/raw/refs/heads/main/2691FB63-EDCE-4FEA-9FF6-55E896B92298-ezgif.com-gif-to-mp4-converter.mp4" autoplay muted loop playsinline></video>
       <video class="span-2" src="https://github.com/saioha/GIFs-/raw/refs/heads/main/07922ED7-1077-4810-874E-B26A53D5CE92-ezgif.com-gif-to-mp4-converter.mp4" autoplay muted loop playsinline></video>
     </div>
-    <button class="paw-btn paw-position" id="pawToPage5">
-      <img src="https://github.com/saioha/GIFs-/raw/refs/heads/main/IMG_4774.png" alt="лапка">
-    </button>
+    <button class="paw-btn" id="pawToPage5"><img src="https://github.com/saioha/GIFs-/raw/refs/heads/main/IMG_4774.png" alt="лапка"></button>
   </div>
 
-  <!-- СТРАНИЦА 5: Письмо -->
-  <div class="page" id="page5" style="background: #FFFDD0;">
+  <!-- СТРАНИЦА 5: Пингвинчик (НОВАЯ) -->
+  <div class="page" id="page5">
+    <div class="glass-card"><h2>🐧 а вот благодаря этому пингвинчику мы познакомились</h2></div>
+    <img src="https://github.com/saioha/GIFs-/blob/edd063582a6429f114c71a90995ce9ec13b1cb95/%D0%91%D0%B5%D0%B7%20%D0%BD%D0%B0%D0%B7%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F65_20260420204253.png?raw=true" 
+         alt="Пингвинчик" style="width: 80%; max-width: 300px; border-radius: 40px; box-shadow: 0 12px 28px rgba(0,0,0,0.1); margin: 10px 0;">
+    <button class="paw-btn" id="pawToPage6"><img src="https://github.com/saioha/GIFs-/raw/refs/heads/main/IMG_4774.png" alt="лапка"></button>
+  </div>
+
+  <!-- СТРАНИЦА 6: Конверт -->
+  <div class="page" id="page6">
     <div class="glass-card"><h2>💌 а тут я стишок написала</h2></div>
-    <div class="envelope" id="envelope">
-      <div class="envelope-body"></div>
-      <div class="envelope-flap"></div>
-      <div class="paper" id="letterPaper">
-        <pre style="font-family: 'Caveat', cursive; white-space: pre-wrap; font-size: 1rem; margin: 0;">Встретимся дома
+    <div class="envelope-container">
+      <div class="envelope" id="envelope">
+        <div class="envelope-body"></div>
+        <div class="envelope-flap"></div>
+      </div>
+    </div>
+    <button class="btn-pink" id="openLetterBtn">Посмотреть</button>
+    <button class="paw-btn" id="pawToPage7"><img src="https://github.com/saioha/GIFs-/raw/refs/heads/main/IMG_4774.png" alt="лапка"></button>
+  </div>
+
+  <!-- СТРАНИЦА 7: Финал -->
+  <div class="page" id="page7" style="position:relative;">
+    <div id="kissContainer" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none;"></div>
+    <div style="z-index:5; text-align:center;">
+      <div class="glass-card">
+        <h1>спасибо котик за наш год</h1>
+        <p style="font-size:1.8rem;">я люблю тебя с каждым днем все сильнее🩷</p>
+      </div>
+      <button class="reset-btn" id="resetButton">⟲ Пересмотреть</button>
+    </div>
+  </div>
+
+  <!-- Оверлей письма -->
+  <div class="letter-overlay" id="letterOverlay">
+    <div class="letter-paper">
+      <pre style="font-family:'Caveat',cursive; white-space:pre-wrap; font-size:1.1rem; margin:0;">Встретимся дома
 
 Прости за глупости, что наговорила,
 за резкость, что вышла случайно.
@@ -489,23 +473,7 @@
 Я просто хочу написать тебе: «Встретимся дома».
 Потому что всё, что у нас есть сейчас, —
 слишком живое, чтобы стать прошлым.</pre>
-      </div>
-    </div>
-    <button class="btn-pink" id="openEnvelopeBtn">Посмотреть</button>
-    <button class="paw-btn paw-position" id="pawToPage6">
-      <img src="https://github.com/saioha/GIFs-/raw/refs/heads/main/IMG_4774.png" alt="лапка">
-    </button>
-  </div>
-
-  <!-- СТРАНИЦА 6: Финал -->
-  <div class="page hearts-bg" id="page6" style="position: relative;">
-    <div id="kissContainer" style="position: absolute; top:0; left:0; width:100%; height:100%; pointer-events: none;"></div>
-    <div style="z-index:5; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
-      <div class="glass-card" style="max-width: 90%;">
-        <h1 style="font-size: 1.9rem;">спасибо котик за наш год</h1>
-        <p style="font-size: 1.8rem; margin: 12px 0;">я люблю тебя с каждым днем все сильнее🩷</p>
-      </div>
-      <button class="reset-btn" id="resetButton">⟲ Пересмотреть</button>
+      <button class="close-letter" id="closeLetterBtn">Закрыть</button>
     </div>
   </div>
 </div>
@@ -514,7 +482,7 @@
   (function(){
     "use strict";
 
-    // ----- Элементы -----
+    // Элементы
     const pages = document.querySelectorAll('.page');
     const page1 = document.getElementById('page1');
     const page2 = document.getElementById('page2');
@@ -522,276 +490,190 @@
     const page4 = document.getElementById('page4');
     const page5 = document.getElementById('page5');
     const page6 = document.getElementById('page6');
+    const page7 = document.getElementById('page7');
     
     const vinylImg = document.getElementById('vinylImage');
-    const catVideo = document.getElementById('catVideo');
+    const catVideo = document.querySelector('#page1 video');
     
-    // Аудио
+    // Аудио – глобальное, не выключается
     const audio = new Audio('https://github.com/saioha/GIFs-/raw/refs/heads/main/Sweater-Weather-The-Neighbourhood.mp3');
     audio.loop = true;
     audio.preload = 'auto';
+    let audioStarted = false;
     
-    // Canvas и анимация рисования
+    // Canvas
     const canvas = document.getElementById('drawingCanvas');
     const ctx = canvas.getContext('2d');
     const captionDiv = document.getElementById('drawingCaption');
     
     // Состояния
-    let currentPage = 0; // 0-based: 0=page1
+    let currentPage = 0;
     let animationFrame = null;
     let heartsParticles = [];
     let drawingCompleted = false;
     let kissInterval = null;
     
-    // ----- Переключение страниц с плавным переходом -----
+    // Конверт и письмо
+    const envelope = document.getElementById('envelope');
+    const letterOverlay = document.getElementById('letterOverlay');
+    const openLetterBtn = document.getElementById('openLetterBtn');
+    const closeLetterBtn = document.getElementById('closeLetterBtn');
+    
+    // Навигация
     function showPage(index) {
       if (index === currentPage) return;
-      // Остановка специфичных для страницы процессов
-      if (currentPage === 1) { // page2
-        audio.pause();
-        vinylImg.classList.remove('spin');
-      }
+      
+      // Остановка специфичных процессов
       if (currentPage === 2) { // page3
         if (animationFrame) cancelAnimationFrame(animationFrame);
         drawingCompleted = false;
         heartsParticles = [];
       }
-      if (currentPage === 5) { // page6
+      if (currentPage === 6) { // page7
         stopKissAnimation();
       }
       
-      pages.forEach((p, i) => {
-        p.classList.toggle('active', i === index);
-      });
+      pages.forEach((p, i) => p.classList.toggle('active', i === index));
       currentPage = index;
       
-      // Активация страницы
-      if (index === 0) {
-        // страница 1: убедимся, видео играет
-        catVideo.play().catch(()=>{});
-        resetVinylAndAudio();
-      }
-      if (index === 1) { // page2
-        vinylImg.classList.add('spin');
-        // Воспроизведение аудио (после жеста пользователя, paw уже кликнут)
+      // Запуск аудио при первом входе на страницу 2
+      if (index === 1 && !audioStarted) {
         audio.play().catch(e => console.log('audio play pending'));
+        audioStarted = true;
+        vinylImg.classList.add('spin');
       }
-      if (index === 2) { // page3
+      if (index === 1 && audioStarted) {
+        vinylImg.classList.add('spin');
+      }
+      
+      if (index === 0) {
+        catVideo.play().catch(()=>{});
+        if (!audioStarted) vinylImg.classList.remove('spin');
+      }
+      
+      if (index === 2) { // страница рисования
         startDrawingSequence();
       }
-      if (index === 5) { // page6
+      
+      if (index === 6) { // финал
         startKissAnimation();
+      }
+      
+      // Закрыть письмо при уходе со страницы конверта
+      if (index !== 5) {
+        letterOverlay.classList.remove('show');
+        envelope.classList.remove('open');
       }
     }
     
-    function resetVinylAndAudio() {
-      audio.pause();
-      audio.currentTime = 0;
-      vinylImg.classList.remove('spin');
-    }
+    // Привязка лапок (индексы: 0-страница1, 1-2, 2-3, 3-4, 4-5, 5-6, 6-7)
+    document.getElementById('pawToPage2').addEventListener('click', ()=> showPage(1));
+    document.getElementById('pawToPage3').addEventListener('click', ()=> showPage(2));
+    document.getElementById('pawToPage4').addEventListener('click', ()=> showPage(3));
+    document.getElementById('pawToPage5').addEventListener('click', ()=> showPage(4));
+    document.getElementById('pawToPage6').addEventListener('click', ()=> showPage(5));
+    document.getElementById('pawToPage7').addEventListener('click', ()=> showPage(6));
     
-    // ----- Переходы по клику на лапку -----
-    document.getElementById('pawToPage2').addEventListener('click', () => showPage(1));
-    document.getElementById('pawToPage3').addEventListener('click', () => showPage(2));
-    document.getElementById('pawToPage4').addEventListener('click', () => showPage(3));
-    document.getElementById('pawToPage5').addEventListener('click', () => showPage(4));
-    document.getElementById('pawToPage6').addEventListener('click', () => showPage(5));
-    
-    // Конверт
-    const envelope = document.getElementById('envelope');
-    const openBtn = document.getElementById('openEnvelopeBtn');
-    openBtn.addEventListener('click', () => {
+    // Конверт: открываем оверлей
+    openLetterBtn.addEventListener('click', ()=> {
       envelope.classList.add('open');
+      letterOverlay.classList.add('show');
+    });
+    closeLetterBtn.addEventListener('click', ()=> {
+      letterOverlay.classList.remove('show');
+    });
+    // Клик по конверту тоже открывает
+    envelope.addEventListener('click', ()=> {
+      envelope.classList.add('open');
+      letterOverlay.classList.add('show');
     });
     
-    // Сброс всего
-    document.getElementById('resetButton').addEventListener('click', () => {
-      // Закрыть конверт
-      envelope.classList.remove('open');
-      // Сброс анимаций
+    // Сброс
+    document.getElementById('resetButton').addEventListener('click', ()=> {
+      // Сброс аудио (остановка)
+      audio.pause();
+      audio.currentTime = 0;
+      audioStarted = false;
+      vinylImg.classList.remove('spin');
+      
       if (animationFrame) cancelAnimationFrame(animationFrame);
       stopKissAnimation();
-      resetVinylAndAudio();
-      // Очистить канвас и перезапустить рисование при следующем входе
       drawingCompleted = false;
       heartsParticles = [];
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.clearRect(0,0,canvas.width,canvas.height);
       captionDiv.style.opacity = '0';
-      // Показать первую страницу
+      envelope.classList.remove('open');
+      letterOverlay.classList.remove('show');
+      
       showPage(0);
-      // Убедиться, видео играет
       catVideo.play().catch(()=>{});
     });
     
-    // ----- Анимация рисования (страница 3) -----
+    // Рисование (без изменений)
     function startDrawingSequence() {
       drawingCompleted = false;
       heartsParticles = [];
       captionDiv.style.opacity = '0';
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
-      const w = 400, h = 400;
-      canvas.width = w; canvas.height = h;
-      
+      ctx.clearRect(0,0,400,400);
       let step = 0;
-      const totalSteps = 70; 
+      const total = 70;
       
-      function drawStickFigure(progress) {
-        ctx.clearRect(0, 0, w, h);
-        ctx.lineWidth = 4;
-        ctx.strokeStyle = '#2c3e50';
-        ctx.lineCap = 'round';
-        ctx.lineJoin = 'round';
-        
-        // голова (круг)
-        if (progress >= 0.1) {
-          ctx.beginPath();
-          ctx.arc(200, 120, 28, 0, Math.PI * 2);
-          ctx.stroke();
-        }
-        // тело
-        if (progress >= 0.25) {
-          ctx.beginPath();
-          ctx.moveTo(200, 148);
-          ctx.lineTo(200, 260);
-          ctx.stroke();
-        }
-        // руки
-        if (progress >= 0.4) {
-          ctx.beginPath();
-          ctx.moveTo(200, 180);
-          ctx.lineTo(150, 220);
-          ctx.stroke();
-        }
-        if (progress >= 0.55) {
-          ctx.beginPath();
-          ctx.moveTo(200, 180);
-          ctx.lineTo(250, 220);
-          ctx.stroke();
-        }
-        // ноги
-        if (progress >= 0.7) {
-          ctx.beginPath();
-          ctx.moveTo(200, 260);
-          ctx.lineTo(160, 330);
-          ctx.stroke();
-        }
-        if (progress >= 0.85) {
-          ctx.beginPath();
-          ctx.moveTo(200, 260);
-          ctx.lineTo(240, 330);
-          ctx.stroke();
-        }
+      function drawStickFigure(prog) {
+        ctx.clearRect(0,0,400,400);
+        ctx.lineWidth=4; ctx.strokeStyle='#2c3e50';
+        if(prog>=0.1){ctx.beginPath(); ctx.arc(200,120,28,0,Math.PI*2); ctx.stroke();}
+        if(prog>=0.25){ctx.beginPath(); ctx.moveTo(200,148); ctx.lineTo(200,260); ctx.stroke();}
+        if(prog>=0.4){ctx.beginPath(); ctx.moveTo(200,180); ctx.lineTo(150,220); ctx.stroke();}
+        if(prog>=0.55){ctx.beginPath(); ctx.moveTo(200,180); ctx.lineTo(250,220); ctx.stroke();}
+        if(prog>=0.7){ctx.beginPath(); ctx.moveTo(200,260); ctx.lineTo(160,330); ctx.stroke();}
+        if(prog>=0.85){ctx.beginPath(); ctx.moveTo(200,260); ctx.lineTo(240,330); ctx.stroke();}
       }
-      
       function drawFilledHeart() {
-        ctx.fillStyle = '#e63946';
-        ctx.shadowColor = '#ffb6c1';
-        ctx.shadowBlur = 12;
-        ctx.beginPath();
-        ctx.moveTo(200, 220);
-        ctx.bezierCurveTo(170, 180, 130, 200, 200, 260);
-        ctx.bezierCurveTo(270, 200, 230, 180, 200, 220);
-        ctx.fill();
-        ctx.shadowBlur = 0;
+        ctx.fillStyle='#e63946'; ctx.shadowBlur=12; ctx.shadowColor='#ffb6c1';
+        ctx.beginPath(); ctx.moveTo(200,220); ctx.bezierCurveTo(170,180,130,200,200,260); ctx.bezierCurveTo(270,200,230,180,200,220); ctx.fill();
+        ctx.shadowBlur=0;
       }
       
-      function animateDrawing(timestamp) {
+      function animate() {
         if (!pages[2].classList.contains('active')) return;
-        
-        if (step <= totalSteps) {
-          let progress = step / totalSteps;
-          drawStickFigure(progress);
+        if (step <= total) {
+          drawStickFigure(step/total);
           step++;
-          animationFrame = requestAnimationFrame(animateDrawing);
+          animationFrame = requestAnimationFrame(animate);
         } else {
-          // рисуем сердце и надпись
-          drawStickFigure(1);
-          drawFilledHeart();
-          captionDiv.style.opacity = '1';
-          drawingCompleted = true;
-          // запускаем хаотичные сердечки
-          initHearts();
-          animateHearts();
+          drawStickFigure(1); drawFilledHeart(); captionDiv.style.opacity='1'; drawingCompleted=true;
+          initHearts(); animateHearts();
         }
       }
-      
       function initHearts() {
-        heartsParticles = [];
-        for (let i=0; i<40; i++) {
-          heartsParticles.push({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            vx: (Math.random() - 0.5) * 1.8,
-            vy: (Math.random() - 0.5) * 1.8,
-            size: 8 + Math.random() * 18,
-          });
-        }
+        for(let i=0;i<40;i++) heartsParticles.push({x:Math.random()*400,y:Math.random()*400,vx:(Math.random()-0.5)*1.8,vy:(Math.random()-0.5)*1.8,size:8+Math.random()*18});
       }
-      
       function animateHearts() {
-        if (!pages[2].classList.contains('active') || !drawingCompleted) return;
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        drawStickFigure(1);
-        drawFilledHeart();
-        
-        ctx.fillStyle = '#ff4d6d';
-        ctx.shadowBlur = 8;
-        ctx.shadowColor = '#ffb3c6';
-        heartsParticles.forEach(p => {
-          p.x += p.vx;
-          p.y += p.vy;
-          if (p.x < 0 || p.x > canvas.width) p.vx *= -0.98;
-          if (p.y < 0 || p.y > canvas.height) p.vy *= -0.98;
-          p.x = Math.min(Math.max(p.x, 5), canvas.width-5);
-          p.y = Math.min(Math.max(p.y, 5), canvas.height-5);
-          
-          ctx.font = `${p.size}px "Segoe UI Emoji", "Apple Color Emoji", sans-serif`;
-          ctx.fillText('❤️', p.x-8, p.y+6);
+        if(!pages[2].classList.contains('active')||!drawingCompleted) return;
+        ctx.clearRect(0,0,400,400); drawStickFigure(1); drawFilledHeart();
+        ctx.fillStyle='#ff4d6d'; ctx.shadowBlur=8;
+        heartsParticles.forEach(p=>{
+          p.x+=p.vx; p.y+=p.vy;
+          if(p.x<0||p.x>400)p.vx*=-0.98; if(p.y<0||p.y>400)p.vy*=-0.98;
+          p.x=Math.min(Math.max(p.x,5),395); p.y=Math.min(Math.max(p.y,5),395);
+          ctx.font=`${p.size}px "Segoe UI Emoji"`; ctx.fillText('❤️',p.x-8,p.y+6);
         });
-        ctx.shadowBlur = 0;
-        animationFrame = requestAnimationFrame(animateHearts);
+        ctx.shadowBlur=0;
+        animationFrame=requestAnimationFrame(animateHearts);
       }
-      
-      step = 0;
-      if (animationFrame) cancelAnimationFrame(animationFrame);
-      animationFrame = requestAnimationFrame(animateDrawing);
+      step=0; if(animationFrame)cancelAnimationFrame(animationFrame);
+      animationFrame=requestAnimationFrame(animate);
     }
     
-    // ----- Поцелуйчики на 6 странице -----
     function startKissAnimation() {
-      const container = document.getElementById('kissContainer');
-      function spawnKiss() {
-        if (!pages[5].classList.contains('active')) return;
-        const kiss = document.createElement('div');
-        kiss.className = 'kiss';
-        kiss.textContent = '💋';
-        kiss.style.left = Math.random() * 90 + '%';
-        kiss.style.top = Math.random() * 80 + '%';
-        container.appendChild(kiss);
-        setTimeout(() => kiss.remove(), 2500);
-      }
-      kissInterval = setInterval(spawnKiss, 600);
+      const cont = document.getElementById('kissContainer');
+      function spawn() { if(!pages[6].classList.contains('active')) return; const k=document.createElement('div'); k.className='kiss'; k.textContent='💋'; k.style.left=Math.random()*90+'%'; k.style.top=Math.random()*80+'%'; cont.appendChild(k); setTimeout(()=>k.remove(),2500); }
+      kissInterval = setInterval(spawn,600);
     }
-    function stopKissAnimation() {
-      if (kissInterval) clearInterval(kissInterval);
-      document.getElementById('kissContainer').innerHTML = '';
-    }
+    function stopKissAnimation() { if(kissInterval) clearInterval(kissInterval); document.getElementById('kissContainer').innerHTML=''; }
     
-    // Устранение задержки видео на первой странице
-    window.addEventListener('load', () => {
-      catVideo.play().catch(()=>{});
-    });
-    
-    // При клике на paw для page2 запускаем аудио (уже внутри showPage)
-    // также гарантируем playsinline для всех видео
-    document.querySelectorAll('video').forEach(v => {
-      v.setAttribute('playsinline', '');
-      v.setAttribute('webkit-playsinline', '');
-    });
-    
-    // сброс при уходе со страницы конверта
-    // адаптивность и дополнительные фиксы
+    window.addEventListener('load', ()=>{ catVideo.play().catch(()=>{}); });
+    document.querySelectorAll('video').forEach(v=>{ v.setAttribute('playsinline',''); v.setAttribute('webkit-playsinline',''); });
   })();
 </script>
 </body>
